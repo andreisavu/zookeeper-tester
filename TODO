@@ -1,0 +1,18 @@
+
+TODO
+
+* load config & build cluster spec
+* deploy zookeeper cluster
+* destroy zookeeper cluster
+
+* display servers in the UI (wow effect)
+* time series with output from "mntr"
+
+* byteman as a role (just untar)
+* inject rule
+
+* queue code (rewrote to use netflix curator & 3.4.2)
+* workload generator + charts for latency & throughput
+
+* catalog of rules with drag & drop support
+
