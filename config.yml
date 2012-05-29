@@ -1,0 +1,14 @@
+
+clusterName: asavu-zookeeper
+
+whirr:
+  provider: aws-ec2
+  identity: identity
+  credential: credential
+
+logging:
+  console:
+    enabled: true
+    threshold: INFO
+
+
