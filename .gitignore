@@ -5,7 +5,11 @@
 *.war
 *.ear
 
+# Eclipse files
 target/
+.settings
+.project
+.classpath
 
 .*.sw[a-z]
 *.un~
