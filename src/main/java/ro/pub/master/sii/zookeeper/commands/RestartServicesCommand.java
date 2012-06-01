@@ -21,5 +21,7 @@ public class RestartServicesCommand extends ConfiguredCommand<TesterConfiguratio
         ClusterSpec spec = config.getClusterSpec();
         controller.stopServices(spec);
         controller.startServices(spec);
+
+        System.exit(0); /* force application exit */
     }
 }

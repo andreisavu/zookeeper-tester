@@ -13,5 +13,6 @@ logging:
     enabled: true
     threshold: INFO
   loggers:
+    jclouds.ssh: ERROR
     net.schmizz.sshj: ERROR
 

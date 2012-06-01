@@ -10,6 +10,7 @@ import ro.pub.master.sii.zookeeper.commands.RestartServicesCommand;
 import ro.pub.master.sii.zookeeper.config.TesterConfiguration;
 import ro.pub.master.sii.zookeeper.health.HomeHealthCheck;
 import ro.pub.master.sii.zookeeper.resources.HomeResource;
+import ro.pub.master.sii.zookeeper.resources.NodeResource;
 
 public class TesterService extends Service<TesterConfiguration> {
 
@@ -29,9 +30,12 @@ public class TesterService extends Service<TesterConfiguration> {
     }
 
     @Override
-    protected void initialize(TesterConfiguration testerConfiguration,
+    protected void initialize(TesterConfiguration config,
                               Environment environment) throws Exception {
+
         environment.addResource(new HomeResource());
+        environment.addResource(new NodeResource(config));
+
         environment.addHealthCheck(new HomeHealthCheck());
     }
 }

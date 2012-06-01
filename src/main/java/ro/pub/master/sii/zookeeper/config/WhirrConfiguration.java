@@ -28,7 +28,7 @@ public class WhirrConfiguration {
 
     @NotEmpty
     @JsonProperty
-    private String hardwareId = "t1.micro";
+    private String hardwareId = "m1.small";
 
     @NotEmpty
     @JsonProperty

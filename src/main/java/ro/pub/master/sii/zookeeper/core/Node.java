@@ -13,6 +13,10 @@ public class Node {
         return ip;
     }
 
+    public String getUri() {
+        return "/nodes/" + ip;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -33,7 +37,7 @@ public class Node {
     @Override
     public String toString() {
         return "Node{" +
-                "ip='" + ip + '\'' +
-                '}';
+            "ip='" + ip + '\'' +
+            '}';
     }
 }
