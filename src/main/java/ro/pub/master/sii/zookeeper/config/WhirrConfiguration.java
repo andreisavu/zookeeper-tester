@@ -1,6 +1,6 @@
 package ro.pub.master.sii.zookeeper.config;
 
-import org.apache.whirr.ClusterSpec;
+import java.net.URI;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -8,7 +8,7 @@ public class WhirrConfiguration {
 
     @NotEmpty
     @JsonProperty
-    private String provider;
+    private String provider = "aws-ec2";
 
     @NotEmpty
     @JsonProperty
@@ -17,6 +17,22 @@ public class WhirrConfiguration {
     @NotEmpty
     @JsonProperty
     private String credential;
+
+    @NotEmpty
+    @JsonProperty
+    private String locationId = "eu-west-1";
+
+    @NotEmpty
+    @JsonProperty
+    private String imageId = "eu-west-1/ami-edc6fe99";
+
+    @NotEmpty
+    @JsonProperty
+    private String hardwareId = "t1.micro";
+
+    @NotEmpty
+    @JsonProperty
+    private URI tarballUri = URI.create("http://apache.osuosl.org/zookeeper/zookeeper-3.4.3/zookeeper-3.4.3.tar.gz");
 
     public String getProvider() {
         return provider;
@@ -30,7 +46,19 @@ public class WhirrConfiguration {
         return credential;
     }
 
-    public ClusterSpec buildClusterSpec() {
-        return null; // TODO implement this
+    public String getLocationId() {
+        return locationId;
+    }
+
+    public String getImageId() {
+        return imageId;
+    }
+
+    public String getHardwareId() {
+        return hardwareId;
+    }
+
+    public URI getTarballUri() {
+        return tarballUri;
     }
 }

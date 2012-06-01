@@ -1,14 +1,17 @@
 
 clusterName: asavu-zookeeper
+clusterSize: 3
 
+# AWS Credentials 
 whirr:
-  provider: aws-ec2
   identity: identity
   credential: credential
 
 logging:
+  level: INFO
   console:
     enabled: true
     threshold: INFO
-
+  loggers:
+    net.schmizz.sshj: ERROR
 

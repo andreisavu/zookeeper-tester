@@ -9,13 +9,15 @@
     <packaging>jar</packaging>
 
     <name>zookeeper-tester</name>
-    <description>A tool for FI testing Apache ZooKeeper using jboss Byteman
+    <description>
+        A tool for interactive fault injection testing Apache ZooKeeper
+        using jboss Byteman
     </description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <testng.version>6.4</testng.version>
-        <whirr.version>0.7.1</whirr.version>
+        <whirr.version>0.8.0-brooklyn.1</whirr.version>
         <dropwizard.version>0.4.0</dropwizard.version>
     </properties>
 
@@ -53,6 +55,14 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>ccweb.cloudsoftcorp.com</id>
+            <name>ccweb.cloudsoftcorp.com-releases</name>
+            <url>http://ccweb.cloudsoftcorp.com/maven/cloudsoft-release</url>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>

@@ -1,10 +1,6 @@
 
 TODO
 
-* load config & build cluster spec
-* deploy zookeeper cluster
-* destroy zookeeper cluster
-
 * display servers in the UI (wow effect)
 * time series with output from "mntr"
 
