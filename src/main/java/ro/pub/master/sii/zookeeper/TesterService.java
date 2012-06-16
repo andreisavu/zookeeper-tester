@@ -10,6 +10,7 @@ import ro.pub.master.sii.zookeeper.commands.RestartServicesCommand;
 import ro.pub.master.sii.zookeeper.config.TesterConfiguration;
 import ro.pub.master.sii.zookeeper.health.HomeHealthCheck;
 import ro.pub.master.sii.zookeeper.resources.HomeResource;
+import ro.pub.master.sii.zookeeper.resources.MetricsResource;
 import ro.pub.master.sii.zookeeper.resources.NodeResource;
 
 public class TesterService extends Service<TesterConfiguration> {
@@ -35,6 +36,8 @@ public class TesterService extends Service<TesterConfiguration> {
 
         NodeResource nodeResource = new NodeResource(config);
         environment.addResource(nodeResource);
+
+        environment.addResource(new MetricsResource());
         environment.addResource(new HomeResource(nodeResource));
 
         environment.addHealthCheck(new HomeHealthCheck());

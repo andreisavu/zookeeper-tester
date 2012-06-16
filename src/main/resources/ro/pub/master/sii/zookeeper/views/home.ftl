@@ -69,54 +69,42 @@
                 });
             }
 
-            var latencyChart = newChart("latencyChart", "End to End Queue Latency", "Latency",
-                    function () {
-                        // TODO load last minute worth of latency data
-                        var data = [],
-                                time = (new Date()).getTime(),
-                                i;
+            function noDataFor60Seconds() {
+                var data = [],
+                        time = (new Date()).getTime(),
+                        i;
 
-                        for (i = -60; i <= 0; i++) {
-                            data.push({
-                                x:time + i * 1000,
-                                y:0
-                            });
-                        }
-                        return data;
-                    },
+                for (i = -60; i <= 0; i++) {
+                    data.push({
+                        x:time + i * 1000,
+                        y:0
+                    });
+                }
+                return data;
+            }
+
+            var latencyChart = newChart("latencyChart", "End to End Queue Latency", "Latency",
+                    noDataFor60Seconds,
                     function () {
                         // set up the updating of the chart each second
                         var series = this.series[0];
                         setInterval(function () {
-                            var x = (new Date()).getTime(), // current time
-                                    y = Math.random();
-                            series.addPoint([x, y], true, true);
+                            $.get("/metrics/latency", function (data, status) {
+                                series.addPoint([(new Date()).getTime(), data], true, true);
+                            }, "json");
                         }, 1000);
                     }
-            )
+            );
 
             var throughputChart = newChart("throughputChart", "Queue Throughput", "Messages per second",
-                    function () {
-                        // TODO load last minute worth of latency data
-                        var data = [],
-                                time = (new Date()).getTime(),
-                                i;
-
-                        for (i = -60; i <= 0; i++) {
-                            data.push({
-                                x:time + i * 1000,
-                                y:0
-                            });
-                        }
-                        return data;
-                    },
+                    noDataFor60Seconds,
                     function () {
                         // set up the updating of the chart each second
                         var series = this.series[0];
                         setInterval(function () {
-                            var x = (new Date()).getTime(), // current time
-                                    y = Math.random();
-                            series.addPoint([x, y], true, true);
+                            $.get("/metrics/throughput", function (data, status) {
+                                series.addPoint([(new Date()).getTime(), data], true, true);
+                            }, "json");
                         }, 1000);
                     }
             )
@@ -157,17 +145,15 @@
     </table>
 
     <h3>injector control</h3>
-    <br />
+    <br/>
     <button class="btn btn-danger">Inject 10% Network Failures</button>
     <button class="btn btn-success">Remove Injector</button>
-
 
     <br/><br/>
 
     <h3>workload generator metrics (queue)</h3>
 
     <div id="latencyChart" style="height: 300px;"></div>
-
     <br/>
 
     <div id="throughputChart" style="height: 300px;"></div>
