@@ -14,4 +14,17 @@ function install_byteman() {
     ln -s /usr/local/byteman-download-2.0.4 /usr/local/byteman
 
     echo "export BYTEMAN_HOME=\"/usr/local/byteman\"" >> /etc/profile
+
+    # Download help jar
+
+    local HELPER_JAR_URL="http://people.apache.org/~asavu/random.jar"
+    $CURL_CMD -O $HELPER_JAR_URL || true
+
+    mv random.jar /usr/local/byteman/
+
+    # and rule
+
+    local RULE_URL="http://people.apache.org/~asavu/readPayload.btm"
+    $CURL_CMD -O $RULE_URL || true
+    mv readPayload.btm /usr/local/byteman/
 }
