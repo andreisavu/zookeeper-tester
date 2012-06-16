@@ -33,8 +33,9 @@ public class TesterService extends Service<TesterConfiguration> {
     protected void initialize(TesterConfiguration config,
                               Environment environment) throws Exception {
 
-        environment.addResource(new HomeResource());
-        environment.addResource(new NodeResource(config));
+        NodeResource nodeResource = new NodeResource(config);
+        environment.addResource(nodeResource);
+        environment.addResource(new HomeResource(nodeResource));
 
         environment.addHealthCheck(new HomeHealthCheck());
     }
