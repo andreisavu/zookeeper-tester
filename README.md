@@ -5,6 +5,7 @@ for Apache ZooKeeper based on JBoss Byteman
 (M.Sc. project)
 
 How to use it?
+--------------
 
 0. build everything: mvn clean install
 1. edit config.yml and add your credentials
@@ -16,6 +17,7 @@ How to use it?
 ?. Profit!
 
 License
+-------
 
 Apache License v2.0 
 
