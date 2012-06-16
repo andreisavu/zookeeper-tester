@@ -2,11 +2,13 @@ package ro.pub.master.sii.zookeeper.resources;
 
 import com.google.common.base.Function;
 import com.google.common.base.Splitter;
+import com.google.common.base.Throwables;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.io.CharStreams;
+import com.yammer.dropwizard.logging.Log;
 import org.apache.whirr.Cluster;
 import org.apache.whirr.ClusterController;
 import org.apache.whirr.ClusterSpec;
@@ -32,12 +34,12 @@ import java.util.Set;
 @Produces(MediaType.APPLICATION_JSON)
 public class NodeResource {
 
+    private static final Log LOG = Log.forClass(NodeResource.class);
+
     public static final int DEFAULT_PORT = 2181;
-    private TesterConfiguration config;
     private Cluster cluster;
 
     public NodeResource(TesterConfiguration config) throws Exception {
-        this.config = config;
         this.cluster = loadCluster(config.getClusterSpec());
     }
 
@@ -45,7 +47,11 @@ public class NodeResource {
         ClusterController controller = new ClusterController();
         ClusterStateStore stateStore = new ClusterStateStoreFactory().create(spec);
 
-        return new Cluster(controller.getInstances(spec, stateStore));
+        Set<Cluster.Instance> instances = controller.getInstances(spec, stateStore);
+        for (Cluster.Instance machine : instances) {
+            LOG.info(machine.toString());
+        }
+        return new Cluster(instances);
     }
 
     @GET
@@ -53,13 +59,18 @@ public class NodeResource {
         return Sets.newHashSet(Iterables.transform(cluster.getInstances(),
             new Function<Cluster.Instance, Node>() {
                 public Node apply(Cluster.Instance instance) {
-                    return new Node(instance.getPublicIp());
+                    try {
+                        return new Node(instance);
+                    } catch (IOException e) {
+                        LOG.error("Failed creating node object", e);
+                        throw Throwables.propagate(e);
+                    }
                 }
             }));
     }
 
     @GET
-    @Path("{ip}")
+    @Path("{ip}/mntr")
     public Map<String, String> getInfo(@PathParam("ip") String ip) throws IOException {
         Map<String, String> result = Maps.newHashMap();
         Socket socket = new Socket();
@@ -70,9 +81,9 @@ public class NodeResource {
             for (String line : CharStreams.readLines(
                 new InputStreamReader(socket.getInputStream()))) {
                 List<String> parts = Lists.newArrayList(Splitter.on("\t")
-                        .trimResults()
-                        .omitEmptyStrings()
-                        .split(line));
+                    .trimResults()
+                    .omitEmptyStrings()
+                    .split(line));
                 result.put(parts.get(0), parts.get(1));
             }
             return result;
