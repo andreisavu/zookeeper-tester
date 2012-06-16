@@ -1,8 +1,16 @@
 
+What is this thing?
+-------------------
+
 A tool for interactive fault injection testing 
 for Apache ZooKeeper based on JBoss Byteman
 
 (M.Sc. project)
+
+Screenshot
+----------
+
+![Tester Screenshot](https://github.com/andreisavu/zookeeper-tester/raw/master/screenshot.png)
 
 How to use it?
 --------------
