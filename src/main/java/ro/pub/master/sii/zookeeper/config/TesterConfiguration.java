@@ -41,7 +41,7 @@ public class TesterConfiguration extends Configuration {
             "whirr.zookeeper.tarball.url", whirr.getTarballUri().toString());
 
         spec.setInstanceTemplates(ImmutableList.of(
-            InstanceTemplate.builder().numberOfInstance(clusterSize).roles("zookeeper").build()
+            InstanceTemplate.builder().numberOfInstance(clusterSize).roles("zookeeper", "byteman").build()
         ));
 
         return spec;
