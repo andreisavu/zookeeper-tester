@@ -43,11 +43,11 @@
             <artifactId>whirr-zookeeper</artifactId>
             <version>${whirr.version}</version>
         </dependency>
-        <dependency>
+        <!-- dependency>
             <groupId>com.netflix.curator</groupId>
             <artifactId>curator-framework</artifactId>
             <version>${netflix-curator.version}</version>
-        </dependency>
+        </dependency -->
         <dependency>
             <groupId>com.yammer.dropwizard</groupId>
             <artifactId>dropwizard-testing</artifactId>

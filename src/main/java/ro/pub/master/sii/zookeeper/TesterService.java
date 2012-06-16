@@ -39,7 +39,7 @@ public class TesterService extends Service<TesterConfiguration> {
         environment.addResource(nodeResource);
 
         environment.addResource(new MetricsResource());
-        environment.addResource(new InjectorResource());
+        environment.addResource(new InjectorResource(config));
         environment.addResource(new HomeResource(nodeResource));
 
         environment.addHealthCheck(new HomeHealthCheck());

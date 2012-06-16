@@ -110,6 +110,25 @@
             )
         });
 
+        function toggleInjectorButtons(disabledOrNot) {
+            $("#enableInjector").attr("disabled", disabledOrNot);
+            $("#disableInjector").attr("disabled", disabledOrNot);
+        }
+
+        function enableInjector() {
+            toggleInjectorButtons(true);
+            $.post('/injector/enable', function (data, textStatus) {
+                toggleInjectorButtons(false);
+            });
+        }
+
+        function disableInjector() {
+            toggleInjectorButtons(true);
+            $.post('/injector/disable', function (data, textStatus) {
+                toggleInjectorButtons(false);
+            });
+        }
+
     </script>
 
 </head>
@@ -146,8 +165,12 @@
 
     <h3>injector control</h3>
     <br/>
-    <button class="btn btn-danger" onclick="$.post('/injector/enable');">Inject 10% Network Failures</button>
-    <button class="btn btn-success" onclick="$.post('/injector/disable');">Remove Injector</button>
+    <button id="enableInjector" class="btn btn-danger" onclick="enableInjector()">
+        Inject 10% Network Failures
+    </button>
+    <button id="disableInjector" class="btn btn-success" onclick="disableInjector()">
+        Remove Injector
+    </button>
 
     <br/><br/>
 
