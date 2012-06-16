@@ -19,6 +19,7 @@
         <testng.version>6.4</testng.version>
         <whirr.version>0.8.0-brooklyn.1</whirr.version>
         <dropwizard.version>0.4.0</dropwizard.version>
+        <rrd4j.version>2.1.1</rrd4j.version>
     </properties>
 
     <dependencies>
@@ -41,6 +42,11 @@
             <groupId>org.apache.whirr</groupId>
             <artifactId>whirr-zookeeper</artifactId>
             <version>${whirr.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.rrd4j</groupId>
+            <artifactId>rrd4j</artifactId>
+            <version>${rrd4j.version}</version>
         </dependency>
         <dependency>
             <groupId>com.yammer.dropwizard</groupId>
@@ -93,9 +99,9 @@
                         <configuration>
                             <transformers>
                                 <transformer
-                                    implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                        implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                                 <transformer
-                                    implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>
                                         ro.pub.master.sii.zookeeper.TesterService
                                     </mainClass>

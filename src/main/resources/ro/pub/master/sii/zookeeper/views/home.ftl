@@ -12,12 +12,16 @@
 </head>
 
 <body>
-<div class="container">
+<div class="container" style="width: 960px;">
     <br/><br/>
 
-    <h2># a tool for interactive fault injection testing (by <a href="http://twitter.com/andreisavu">@andreisavu</a>)</h2>
-    <br /><br />
+    <h2># a tool for interactive fault injection testing
+        (by <a href="http://twitter.com/andreisavu">@andreisavu</a>)
+    </h2>
+    <br/><br/>
 
+
+    <h3>cluster nodes</h3>
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -37,7 +41,10 @@
         </tbody>
     </table>
 
+    <br />
+    <h3>metrics</h3>
 
+</div>
 </body>
 
 </html>
