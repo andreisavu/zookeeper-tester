@@ -146,8 +146,8 @@
 
     <h3>injector control</h3>
     <br/>
-    <button class="btn btn-danger">Inject 10% Network Failures</button>
-    <button class="btn btn-success">Remove Injector</button>
+    <button class="btn btn-danger" onclick="$.post('/injector/enable');">Inject 10% Network Failures</button>
+    <button class="btn btn-success" onclick="$.post('/injector/disable');">Remove Injector</button>
 
     <br/><br/>
 
@@ -157,6 +157,7 @@
     <br/>
 
     <div id="throughputChart" style="height: 300px;"></div>
+    <br/><br/>
 
 </div>
 </body>
