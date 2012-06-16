@@ -17,4 +17,9 @@ public class BytemanClusterActionHandler extends ClusterActionHandlerSupport {
     public void beforeBootstrap(ClusterActionEvent event) {
         addStatement(event, call("install_byteman"));
     }
+
+    @Override
+    public void beforeStart(ClusterActionEvent event) {
+        addStatement(event, call("attach_byteman"));
+    }
 }

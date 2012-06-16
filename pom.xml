@@ -19,6 +19,7 @@
         <testng.version>6.4</testng.version>
         <whirr.version>0.8.0-brooklyn.1</whirr.version>
         <dropwizard.version>0.4.0</dropwizard.version>
+        <netflix-curator.version>1.1.12</netflix-curator.version>
     </properties>
 
     <dependencies>
@@ -43,6 +44,11 @@
             <version>${whirr.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.netflix.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+            <version>${netflix-curator.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.yammer.dropwizard</groupId>
             <artifactId>dropwizard-testing</artifactId>
             <version>${dropwizard.version}</version>
@@ -57,6 +63,11 @@
     </dependencies>
 
     <repositories>
+        <repository>
+            <id>central-uk-mirror</id>
+            <name>UK Central</name>
+            <url>http://uk.maven.org/maven2</url>
+        </repository>
         <repository>
             <id>ccweb.cloudsoftcorp.com</id>
             <name>ccweb.cloudsoftcorp.com-releases</name>
