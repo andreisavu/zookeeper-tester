@@ -8,6 +8,9 @@ import ro.pub.master.sii.zookeeper.commands.DestroyClusterCommand;
 import ro.pub.master.sii.zookeeper.commands.LaunchClusterCommand;
 import ro.pub.master.sii.zookeeper.commands.RestartServicesCommand;
 import ro.pub.master.sii.zookeeper.config.TesterConfiguration;
+import ro.pub.master.sii.zookeeper.core.ManagedConsumer;
+import ro.pub.master.sii.zookeeper.core.ManagedProducer;
+import ro.pub.master.sii.zookeeper.core.ManagedZooKeeper;
 import ro.pub.master.sii.zookeeper.health.HomeHealthCheck;
 import ro.pub.master.sii.zookeeper.resources.HomeResource;
 import ro.pub.master.sii.zookeeper.resources.InjectorResource;
@@ -38,7 +41,16 @@ public class TesterService extends Service<TesterConfiguration> {
         NodeResource nodeResource = new NodeResource(config);
         environment.addResource(nodeResource);
 
-        environment.addResource(new MetricsResource());
+        ManagedZooKeeper zookeeper = new ManagedZooKeeper(nodeResource.list());
+        environment.manage(zookeeper);
+
+        ManagedConsumer consumer = new ManagedConsumer(zookeeper);
+        environment.manage(consumer);
+
+        ManagedProducer producer = new ManagedProducer(zookeeper);
+        environment.manage(producer);
+
+        environment.addResource(new MetricsResource(consumer, producer));
         environment.addResource(new InjectorResource(config));
         environment.addResource(new HomeResource(nodeResource));
 

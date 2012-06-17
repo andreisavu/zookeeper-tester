@@ -1,5 +1,8 @@
 package ro.pub.master.sii.zookeeper.resources;
 
+import ro.pub.master.sii.zookeeper.core.ManagedConsumer;
+import ro.pub.master.sii.zookeeper.core.ManagedProducer;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import java.util.Random;
@@ -8,6 +11,14 @@ import java.util.Random;
 public class MetricsResource {
 
     private final Random random = new Random();
+
+    private final ManagedConsumer consumer;
+    private final ManagedProducer producer;
+
+    public MetricsResource(ManagedConsumer consumer, ManagedProducer producer) {
+        this.consumer = consumer;
+        this.producer = producer;
+    }
 
     @Path("latency")
     @GET
