@@ -95,19 +95,6 @@
                         }, 1000);
                     }
             );
-
-            var throughputChart = newChart("throughputChart", "Queue Throughput", "Messages per second",
-                    noDataFor60Seconds,
-                    function () {
-                        // set up the updating of the chart each second
-                        var series = this.series[0];
-                        setInterval(function () {
-                            $.get("/metrics/throughput", function (data, status) {
-                                series.addPoint([(new Date()).getTime(), data], true, true);
-                            }, "json");
-                        }, 1000);
-                    }
-            )
         });
 
         function toggleInjectorButtons(disabledOrNot) {
@@ -177,9 +164,6 @@
     <h3>workload generator metrics (queue)</h3>
 
     <div id="latencyChart" style="height: 300px;"></div>
-    <br/>
-
-    <div id="throughputChart" style="height: 300px;"></div>
     <br/><br/>
 
 </div>

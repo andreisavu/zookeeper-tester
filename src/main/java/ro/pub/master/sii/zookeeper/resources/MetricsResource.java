@@ -10,25 +10,15 @@ import java.util.Random;
 @Path("/metrics")
 public class MetricsResource {
 
-    private final Random random = new Random();
-
     private final ManagedConsumer consumer;
-    private final ManagedProducer producer;
 
-    public MetricsResource(ManagedConsumer consumer, ManagedProducer producer) {
+    public MetricsResource(ManagedConsumer consumer) {
         this.consumer = consumer;
-        this.producer = producer;
     }
 
     @Path("latency")
     @GET
-    public int latencyAverageOverLastSecond() {
-        return random.nextInt(100);
-    }
-
-    @Path("throughput")
-    @GET
-    public int throughputAverageOverLastSecond() {
-        return random.nextInt(100);
+    public long latencyAverageOverLastSecond() {
+        return consumer.getLatencyAverage();
     }
 }

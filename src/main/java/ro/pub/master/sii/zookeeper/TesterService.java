@@ -17,6 +17,8 @@ import ro.pub.master.sii.zookeeper.resources.InjectorResource;
 import ro.pub.master.sii.zookeeper.resources.MetricsResource;
 import ro.pub.master.sii.zookeeper.resources.NodeResource;
 
+import java.util.UUID;
+
 public class TesterService extends Service<TesterConfiguration> {
 
     public static void main(String[] args) throws Exception {
@@ -44,13 +46,14 @@ public class TesterService extends Service<TesterConfiguration> {
         ManagedZooKeeper zookeeper = new ManagedZooKeeper(nodeResource.list());
         environment.manage(zookeeper);
 
-        ManagedConsumer consumer = new ManagedConsumer(zookeeper);
+        String queueName = UUID.randomUUID().toString();
+        ManagedConsumer consumer = new ManagedConsumer(queueName, zookeeper);
         environment.manage(consumer);
 
-        ManagedProducer producer = new ManagedProducer(zookeeper);
+        ManagedProducer producer = new ManagedProducer(queueName, zookeeper);
         environment.manage(producer);
 
-        environment.addResource(new MetricsResource(consumer, producer));
+        environment.addResource(new MetricsResource(consumer));
         environment.addResource(new InjectorResource(config));
         environment.addResource(new HomeResource(nodeResource));
 

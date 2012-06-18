@@ -34,10 +34,8 @@ import org.apache.zookeeper.data.ACL;
 
 /**
  * A slightly updated version of the code you can find at the following link:
- *
+ * <p/>
  * https://github.com/apache/zookeeper/blob/trunk/src/recipes/queue/src/java/org/apache/zookeeper/recipes/queue/DistributedQueue.java
- *
- *
  */
 
 public class DistributedQueue {
