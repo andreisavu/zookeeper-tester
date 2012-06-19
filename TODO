@@ -1,7 +1,0 @@
-
-TODO
-
-* inject rule functionality
-* queue code (rewrote to use netflix curator & 3.4.2)
-* workload generator + charts for latency & throughput
-
